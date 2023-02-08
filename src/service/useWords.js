@@ -26,15 +26,19 @@ export default () => {
   };
 
   const checkIfWordIsNotOnScreen = (word) => {
-    if (screenWords.value.includes(word)) return false;
+    const screenWord = screenWords.value.find((obj) => obj.word === word);
+    if (!!screenWord && screenWord.active) return false;
     playErrorSound();
     return true;
   };
 
-  const addNewWordToScreen = () => screenWords.value.push(getRandomWord());
+  const addNewWordToScreen = () =>
+    screenWords.value.push({ word: getRandomWord(), active: true });
 
-  const removeWordFromScreen = (word) =>
-    screenWords.value.splice(screenWords.value.indexOf(word), 1);
+  const removeWordFromScreen = (word) => {
+    let screenWord = screenWords.value.find((obj) => obj.word === word);
+    if (!!screenWord) screenWord.active = false;
+  };
 
   const getRandomWord = () => {
     const randomWordIndex = Math.round(Math.random() * allWords.value.length);

@@ -5,6 +5,7 @@
       :input-style="{ color: 'green', fontWeight: 'bolder', fontSize: '15px'}"
       dense
       outlined
+      :readonly="readonly"
       bg-color="dark"
       color="primary"
       v-model="wordInput"
@@ -21,6 +22,12 @@
 import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
+  props: {
+    readonly: {
+      type: Boolean,
+      default: true
+    }
+  },  
   emits: ["onEnter"],
   setup(props, context) {
 

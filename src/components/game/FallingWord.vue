@@ -1,9 +1,8 @@
 <template>
   <q-badge
-    @animation-end="isFalling.value = false"
-    :style="{ left: `calc(${positionStyle}vw)`, color: color }"
+    :style="{ left: `calc(${positionStyle}vw)`, color: word.active ? wordColor : 'black' }"
     :class="`q-ma-none q-pa-none q-pl-sm q-pr-sm ${fallingClass} ${speedClass}`"
-  >{{ word }}</q-badge>>
+  >{{ word.word }}</q-badge>>
 </template>
 
 <script>
@@ -15,8 +14,7 @@ import { getRandomWordColor } from "src/service/util";
 export default defineComponent({
   props: {
     word: {
-      type: String,
-      default: "ERROR"
+      type: Object
     },
     speed: {
       type: Number,
@@ -28,8 +26,9 @@ export default defineComponent({
     const { getRandomWordPosition, removeWordFromScreen } = useWords();
 
     const isFalling = ref(true);
+    const word = ref(props.word);
     const position = ref(getRandomWordPosition());
-    const color = ref(getRandomWordColor());
+    const wordColor = ref(getRandomWordColor());
 
     onMounted(() => removeAfterFall());
 
@@ -40,12 +39,12 @@ export default defineComponent({
 
     const removeAfterFall = () => setTimeout(() => {
         isFalling.value = false;
+        removeWordFromScreen(word.value.word)
     }, 1000 * props.speed);
 
     const fallingClass = computed(() => {
-      return isFalling.value ? 'falling' : 'not-falling';
+      return isFalling.value || word.value.active ? 'falling' : 'not-falling';
     })
-
 
     const speedClass = computed(() => {
       switch (props.speed) {
@@ -62,7 +61,7 @@ export default defineComponent({
       }
     });
 
-    return {speedClass, fallingClass, positionStyle, color }
+    return {speedClass, fallingClass, positionStyle, wordColor }
 
   }
 
@@ -75,9 +74,11 @@ export default defineComponent({
   background: black;
   font-size: 15px;
   font-weight: bold;
+  transition: color 0.4s ease-in-out;
 }
 .not-falling {
   visibility: hidden;
+  color: "black";
 }
 .falling {
   position: absolute;

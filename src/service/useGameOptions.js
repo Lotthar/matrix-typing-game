@@ -8,7 +8,7 @@ const possibleSpeeds = [12, 9, 6, 3];
 export default () => {
   const gameStore = useGameStore();
   const { addNewWordToScreen, loadAllWords } = useWords();
-  const { timeRemaining, speed } = storeToRefs(gameStore);
+  const { timeRemaining, speed, screenWords } = storeToRefs(gameStore);
 
   const countdownIntervalId = ref(null);
   const wordsIntervalId = ref(null);
@@ -36,6 +36,7 @@ export default () => {
   const gameFinished = () => {
     clearInterval(countdownIntervalId.value);
     clearInterval(wordsIntervalId.value);
+    screenWords.value = [];
   };
 
   return {
