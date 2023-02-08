@@ -27,11 +27,12 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .q-header {
-  background: linear-gradient(to bottom, $secondary, $dark-page);
+  background: linear-gradient(to top, $secondary, $dark-page);
+  box-shadow: 0px 5px 27px 1px rgba(0, 112, 0, 0.86);
 }
 .q-footer {
-  box-shadow: 0px 5px 27px 1px rgba(0, 0, 0, 0.1);
-  background: linear-gradient(to top, $secondary, $dark-page);
+  box-shadow: 0px -5px 27px 1px rgba(0, 112, 0, 0.86);
+  background: linear-gradient(to bottom, $secondary, $dark-page);
 }
 .q-toolbar {
   box-shadow: 0px 5px 27px 1px rgba(1, 19, 1, 0.86);

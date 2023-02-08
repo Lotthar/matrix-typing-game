@@ -8,7 +8,8 @@ const possibleSpeeds = [12, 9, 6, 3];
 export default () => {
   const gameStore = useGameStore();
   const { addNewWordToScreen, loadAllWords } = useWords();
-  const { timeRemaining, speed, screenWords } = storeToRefs(gameStore);
+  const { timeRemaining, speed, screenWords, bestScore, score } =
+    storeToRefs(gameStore);
 
   const countdownIntervalId = ref(null);
   const wordsIntervalId = ref(null);
@@ -36,7 +37,12 @@ export default () => {
   const gameFinished = () => {
     clearInterval(countdownIntervalId.value);
     clearInterval(wordsIntervalId.value);
+    updateBestScoreIfBeaten();
     screenWords.value = [];
+  };
+
+  const updateBestScoreIfBeaten = () => {
+    if (bestScore.value < score.value) bestScore.value = score.value;
   };
 
   return {

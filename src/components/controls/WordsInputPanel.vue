@@ -2,7 +2,7 @@
   <div class="column content-center">
     <h6 class="text-primary text-weight-bold q-ma-sm q-mt-md">Enter falling word and press "Enter"</h6>
     <q-input
-      :input-style="{ color: 'green', fontWeight: 'bolder', fontSize: '15px'}"
+      :input-style="{ color: '#31ccec', fontWeight: 'bolder', fontSize: '15px'}"
       dense
       outlined
       :readonly="readonly"
