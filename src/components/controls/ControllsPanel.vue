@@ -9,20 +9,18 @@
 
 <script>
 import { defineComponent, ref, onMounted } from 'vue';
-import useGameOptions from "src/service/useGameOptions";
+// import useGameOptions from "src/service/useGameOptions";
+import { useGameStore } from "stores/game";
+import { storeToRefs } from "pinia";
 import useWords from "src/service/useWords";
 
 export default defineComponent({
 
   setup() {
     
-    const { timeRemaining, startGame, score, bestScore, changeSpeed } = useGameOptions();
+    const gameStore = useGameStore();
     const { getWordScoreValue } = useWords();
-    
-
-    onMounted(() => {
-      // startGame();
-    })
+    const { score, bestScore, timeRemaining } = storeToRefs(gameStore);
 
     const wordEntered = (word) => {
       score.value += getWordScoreValue(word);
@@ -32,4 +30,4 @@ export default defineComponent({
   }
 
 })
-</script>TimeStatus
+</script>

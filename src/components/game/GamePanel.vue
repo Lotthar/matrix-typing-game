@@ -1,23 +1,29 @@
 <template>
   <div class="q-ma-none screen-words-container">
-    <falling-word />
+    <falling-word v-for="(word, index) in fallingWords" :key="index" :word="word" :speed="speed" />
   </div>
 </template>
 
 <script>
 import useGameOptions from 'src/service/useGameOptions';
-import { defineComponent } from 'vue';
+import { useGameStore } from "stores/game";
+import { storeToRefs } from "pinia";
+import { defineComponent,ref, onMounted } from 'vue';
 
 export default defineComponent({
 
   setup() {
 
-    const { speedClass } = useGameOptions();
+    const gameStore = useGameStore();
+    const { startGame } = useGameOptions();
+    const { speed, screenWords } = storeToRefs(gameStore);
+    const fallingWords = ref(screenWords.value);
 
-    // between 10 and 100;
-    const randomPosition = 50;
+    onMounted(() => {
+      // startGame();
+    })
 
-    return { speedClass,randomPosition }
+    return { fallingWords, speed  }
   }
 
 })

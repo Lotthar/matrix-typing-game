@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="hHr LpR fFf">
     <q-header elevated>
       <q-toolbar>
         <q-toolbar-title>The Matrix</q-toolbar-title>
@@ -40,7 +40,6 @@ export default defineComponent({
     font-weight: bolder;
     color: $primary;
     font-size: 3rem;
-    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   }
 }
 </style>
