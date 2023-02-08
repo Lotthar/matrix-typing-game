@@ -1,6 +1,6 @@
 <template>
-  <q-page class="flex flex-center">
-    <!-- Game Panel -->
+  <q-page class="q-ma-none flex flex-start">
+    <game-panel />
   </q-page>
 </template>
 
@@ -8,7 +8,11 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'IndexPage'
+  name: 'IndexPage',
+
+  setup () {
+    return {}
+  }
 })
 </script>
 <style lang="scss" scoped>
@@ -17,6 +21,8 @@ div.controlls {
   background: linear-gradient(to top, $secondary, $dark-page);
 }
 .q-page {
-  background: url("assets/pozadina.gif");
+  // background: url("/pozadina.gif");
+  background: black;
+  height: 70vh;
 }
 </style>
