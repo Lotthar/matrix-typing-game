@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import ControllsPanel from 'src/components/controls/ControllsPanel.vue'
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({

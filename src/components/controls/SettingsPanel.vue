@@ -1,5 +1,5 @@
 <template>
-  <h4>GameSpeed</h4>
+  <h4>GameSettings</h4>
 </template>
 
 <script>

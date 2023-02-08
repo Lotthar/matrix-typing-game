@@ -1,24 +1,34 @@
 <template>
   <div class="row no-wrap justify-evenly">
-    <words-input @onEnterWord="onWordEntered" />
-    <time-status />
-    <game-speed />
-    <restart-game />
+    <words-input-panel @onEnter="wordEntered" />
+    <status-panel :score="score" :bestScore="bestScore" :timeRemaining="timeRemaining" />
+    <settings-panel />
+    <!-- <restart-game /> -->
   </div>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, ref, onMounted } from 'vue';
+import useGameOptions from "src/service/useGameOptions";
+import useWords from "src/service/useWords";
 
 export default defineComponent({
 
   setup() {
     
-    const onWordEntered = (word) => {
-        console.log(word.value);
+    const { timeRemaining, startGame, score, bestScore, changeSpeed } = useGameOptions();
+    const { getWordScoreValue } = useWords();
+    
+
+    onMounted(() => {
+      // startGame();
+    })
+
+    const wordEntered = (word) => {
+      score.value += getWordScoreValue(word);
     }
 
-    return { onWordEntered }
+    return {wordEntered ,score,bestScore, timeRemaining }
   }
 
 })

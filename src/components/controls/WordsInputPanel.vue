@@ -1,14 +1,14 @@
 <template>
   <div class="column content-center">
-    <h6 class="text-primary q-ma-sm q-mt-md">Enter falling word and press "Enter"</h6>
+    <h6 class="text-primary text-weight-bold q-ma-sm q-mt-md">Enter falling word and press "Enter"</h6>
     <q-input
-      :input-style="{ color: 'green', fontWeight: 'bold', fontSize: '15px'}"
+      :input-style="{ color: 'green', fontWeight: 'bolder', fontSize: '15px'}"
       dense
       outlined
       bg-color="dark"
       color="primary"
       v-model="wordInput"
-      @keyup="onKeyUp"
+      @keyup="onEnter"
     >
       <template v-slot:prepend>
         <q-icon color="primary" name="las la-angle-double-right" />
@@ -21,19 +21,19 @@
 import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
-  emits: ["onEnterWord"],
+  emits: ["onEnter"],
   setup(props, context) {
 
     const wordInput = ref(null);
 
-    const onKeyUp = (event) => {
+    const onEnter = (event) => {
         if(event.key === 'Enter') {
-          context.emit("onEnterWord", wordInput)
+          context.emit("onEnter", wordInput)
           wordInput.value = "";
         }
     }
 
-    return { wordInput, onKeyUp }
+    return { wordInput, onEnter }
   }
 })
 </script>
