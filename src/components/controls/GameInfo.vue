@@ -2,7 +2,7 @@
   <div class="column justify-start text-primary">
     <h6 class="q-ma-none q-mb-sm text-primary text-weight-bold">
       <q-icon class="q-mr-sm" color="primary" name="las la-user-tie" />
-      <span class="text-info text-weight-bolder text-h5">{{ user }}</span>
+      <span class="text-info text-weight-bolder text-h5">{{ $loggedUser }}</span>
     </h6>
     <q-btn
       dense
@@ -44,11 +44,16 @@ export default defineComponent({
     const gameStore = useGameStore();
     const wordStore = useWordStore();
 
-    const { startGame, gameFinished, onNewGame } = gameStore;
+    const { startGame, gameFinished, newGame } = gameStore;
     const { resetScreenWords, addNewWordToScreen } = wordStore;
     const {  } = storeToRefs(gameStore);
     
     const user = ref("Branko");
+
+    const onNewGame = () => {
+      gameFinished(resetScreenWords);
+      newGame("GamePage");
+    }
 
     const onRestart = () => {
       gameFinished(resetScreenWords);

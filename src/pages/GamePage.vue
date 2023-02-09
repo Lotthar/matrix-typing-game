@@ -1,5 +1,5 @@
 <template>
-  <q-page class="q-ma-none flex flex-start">
+  <q-page class="`q-ma-none flex flex-start bg-black">
     <game-panel />
   </q-page>
 </template>
@@ -8,7 +8,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'IndexPage',
+  name: 'GamePage',
 
   setup () {
     return {}
@@ -17,8 +17,6 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .q-page {
-  // background: url("/pozadina.gif");
-  background: black;
   height: 70vh;
 }
 </style>

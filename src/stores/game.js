@@ -1,5 +1,4 @@
 import { defineStore } from "pinia";
-import { useSessionStorage } from "src/service/util";
 
 export const useGameStore = defineStore("game", {
   state: () => ({
@@ -17,6 +16,16 @@ export const useGameStore = defineStore("game", {
   getters: {},
 
   actions: {
+    newGame(initPage, newUserClbc, resetGameClbc, addWordClbc, loadWordsClbc) {
+      if (initPage === "GamePage") {
+        this.router.push({ name: "InitialPage" });
+      } else {
+        newUserClbc();
+        this.router.push({ name: "GamePage" });
+        this.startGame(resetGameClbc, addWordClbc, loadWordsClbc);
+      }
+    },
+
     async startGame(resetGameClbc, addWordClbc, loadWordsClbc) {
       if (!!loadWordsClbc) await loadWordsClbc();
       this.activateStartCountDown(1000, () => this.gameFinished(resetGameClbc));
@@ -32,11 +41,6 @@ export const useGameStore = defineStore("game", {
 
     startGeneratingWords(addWordClbc) {
       this.wordsIntervalId = setInterval(addWordClbc, 1300 - 100 * this.speed);
-    },
-
-    onNewGame() {
-      // use router to move page
-      // set some kind of global var to know it's time for user data entry
     },
 
     onSelectGameDuration(duration, resetGameClbc, addWordClbc) {

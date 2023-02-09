@@ -10,19 +10,38 @@
       <router-view />
     </q-page-container>
 
-    <q-footer>
+    <q-footer v-if="showControlls">
       <controlls-panel />
     </q-footer>
   </q-layout>
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue'
+import { defineComponent, watch, ref } from 'vue'
+import { useRoute } from 'vue-router'
 
 export default defineComponent({
   name: 'MainLayout',
 
-  setup () {}
+  setup () {
+
+    const showControlls = ref(false);
+
+    const route = useRoute()
+
+    watch(() => route.path,
+      newPath => {
+        if(newPath.includes("game")) {
+          showControlls.value = true;
+        } else {
+          showControlls.value = false;
+        }
+      }
+    )
+
+    return { showControlls }
+
+  }
 })
 </script>
 <style lang="scss" scoped>

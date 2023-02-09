@@ -1,4 +1,6 @@
 import { useQuasar } from "quasar";
+import { getCurrentInstance, ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
 const wordColors = [
   "#22C626",
@@ -27,8 +29,43 @@ export const useSessionStorage = () => {
   const $q = useQuasar();
 
   const saveInStorage = (key, value) => $q.sessionStorage.set(key, value);
-
   const getFromStorage = (key) => $q.sessionStorage.getItem(key);
 
   return { saveInStorage, getFromStorage };
+};
+
+export const useUser = () => {
+  const { saveInStorage, getFromStorage } = useSessionStorage();
+  const app = getCurrentInstance();
+
+  const usernameRef = ref(null);
+
+  const loadSavedUser = () => {
+    app.appContext.config.globalProperties.$loggedUser = getFromStorage("user");
+  };
+  const newUser = () => {
+    if (!!app && !!usernameRef.value) {
+      app.appContext.config.globalProperties.$loggedUser = usernameRef.value;
+      console.log(app.appContext.config.globalProperties.$loggedUser);
+      saveInStorage("user", usernameRef.value);
+    }
+  };
+
+  return { newUser, loadSavedUser, usernameRef };
+};
+
+export const useRoutesUtil = () => {
+  const $route = useRoute();
+  const $router = useRouter();
+
+  const redirectToPage = (page, queryParams) => {
+    if (!!page && page !== null)
+      $router.push({ name: page, query: { ...queryParams } });
+    else $router.push({ name: ProcessForms.ACTIVE_REQUESTS });
+  };
+
+  const getRouteQueryParam = (param) =>
+    !!$route.query[param] ? $route.query[param] : null;
+
+  return { redirectToPage, getRouteQueryParam, formatDateFromTimestamp };
 };

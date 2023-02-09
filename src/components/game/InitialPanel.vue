@@ -1,0 +1,49 @@
+<template>
+  <div class="column fixed-center">
+    <!--  -->
+    <h3 class="text-primary text-center q-ma-none">-Welcome to New Game-</h3>
+    <!-- <h3 class="text-primary text-center q-ma-none q-mt-md q-mb-md">Enter your player name</h3> -->
+    <q-input
+      :input-style="{ color: '#77c977', fontWeight: 'bold', fontSize: '30px'}"
+      outlined
+      bg-color="dark"
+      v-model="usernameRef"
+      label="Enter your player name"
+      label-color="primary"
+      @keyup.enter="onEnter"
+    >
+      <template v-slot:prepend>
+        <q-icon color="primary" name="las la-angle-double-right" />
+      </template>
+    </q-input>
+  </div>
+</template>
+
+<script>
+import { defineComponent,ref } from 'vue';
+import { useUser } from "src/service/util";
+import { useGameStore } from 'src/stores/game';
+import { useWordStore } from 'src/stores/words';
+
+
+export default defineComponent({
+  
+  setup(props) {
+
+    const gameStore = useGameStore();
+    const wordStore = useWordStore();
+    const { newGame } = gameStore;
+    const { loadAllWords, addNewWordToScreen, resetScreenWords } = wordStore;
+
+    const { newUser, usernameRef} = useUser();
+    
+    const onEnter = () => {
+      console.log("New game starting...")
+      newGame("InitialPage", newUser, resetScreenWords, addNewWordToScreen, loadAllWords);
+    }
+
+    return {onEnter, usernameRef}
+  }
+
+})
+</script>

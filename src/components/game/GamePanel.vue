@@ -8,7 +8,7 @@
 import { useGameStore } from "stores/game";
 import { useWordStore } from "stores/words";
 import { storeToRefs } from "pinia";
-import { defineComponent,ref, onMounted } from 'vue';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
 
@@ -19,12 +19,6 @@ export default defineComponent({
     const { speed } = storeToRefs(gameStore);
     const { screenWords } = storeToRefs(wordStore);
     
-    const { startGame } = gameStore;
-    const { loadAllWords, addNewWordToScreen, resetScreenWords } = wordStore;
-
-    onMounted(() => {
-      startGame(resetScreenWords, addNewWordToScreen,loadAllWords);
-    })
 
     return { speed ,screenWords }
   }
