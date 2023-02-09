@@ -3,7 +3,7 @@
     <words-input-panel @onEnter="wordEntered" />
     <status-panel :score="score" :bestScore="bestScore" :timeRemaining="timeRemainingCurrent" />
     <settings-panel />
-    <restart-game />
+    <game-info />
   </div>
 </template>
 
@@ -11,7 +11,6 @@
 import { defineComponent } from 'vue';
 import { useGameStore } from "stores/game";
 import { useWordStore } from "stores/words";
-
 import { storeToRefs } from "pinia";
 
 export default defineComponent({

@@ -9,7 +9,7 @@
       bg-color="dark"
       color="primary"
       v-model="wordInput"
-      @keyup="onEnter"
+      @keyup.enter="onEnter"
     >
       <template v-slot:prepend>
         <q-icon color="primary" name="las la-angle-double-right" />
@@ -33,11 +33,9 @@ export default defineComponent({
 
     const wordInput = ref(null);
 
-    const onEnter = (event) => {
-        if(event.key === 'Enter') {
-          context.emit("onEnter", wordInput)
-          wordInput.value = "";
-        }
+    const onEnter = () => {
+        context.emit("onEnter", wordInput)
+        wordInput.value = "";
     }
 
     return { wordInput, onEnter }

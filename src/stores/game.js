@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { useSessionStorage } from "src/service/util";
 
 export const useGameStore = defineStore("game", {
   state: () => ({
@@ -31,6 +32,11 @@ export const useGameStore = defineStore("game", {
 
     startGeneratingWords(addWordClbc) {
       this.wordsIntervalId = setInterval(addWordClbc, 1300 - 100 * this.speed);
+    },
+
+    onNewGame() {
+      // use router to move page
+      // set some kind of global var to know it's time for user data entry
     },
 
     onSelectGameDuration(duration, resetGameClbc, addWordClbc) {

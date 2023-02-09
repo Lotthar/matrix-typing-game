@@ -1,5 +1,5 @@
 <template>
-  <div class="column justify-start text-primary">
+  <div class="column justify-evenly text-primary">
     <h5 class="q-ma-none q-mb-sm q-pa-none text-center text-info text-weight-bolder">Game Settings</h5>
     <settings-select
       :option="timeRemainingOption"
