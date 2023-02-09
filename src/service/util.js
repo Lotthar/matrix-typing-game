@@ -53,19 +53,3 @@ export const useUser = () => {
 
   return { newUser, loadSavedUser, usernameRef };
 };
-
-export const useRoutesUtil = () => {
-  const $route = useRoute();
-  const $router = useRouter();
-
-  const redirectToPage = (page, queryParams) => {
-    if (!!page && page !== null)
-      $router.push({ name: page, query: { ...queryParams } });
-    else $router.push({ name: ProcessForms.ACTIVE_REQUESTS });
-  };
-
-  const getRouteQueryParam = (param) =>
-    !!$route.query[param] ? $route.query[param] : null;
-
-  return { redirectToPage, getRouteQueryParam, formatDateFromTimestamp };
-};

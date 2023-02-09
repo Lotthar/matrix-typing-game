@@ -30,7 +30,7 @@ import { useWordStore } from 'src/stores/words';
 
 export default defineComponent({
   
-  setup(props) {
+  setup() {
 
     const gameStore = useGameStore();
     const wordStore = useWordStore();

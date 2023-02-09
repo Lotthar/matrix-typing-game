@@ -33,11 +33,13 @@ export default defineComponent({
     onMounted(() => removeAfterFall());
 
     const positionStyle = computed(() => {
-      if(100 - position.value < 12) return 88;
-      else return `${100 - position.value}`;
+      let calcPosition = 100 - position.value;
+      if(calcPosition < 12) return 88;
+      else return calcPosition;
     });
 
-    const removeAfterFall = () => setTimeout(() => {
+    const removeAfterFall = () => 
+      setTimeout(() => {
         isFalling.value = false;
         word.value.active = false;
         removeWordFromScreen(word.value.word)

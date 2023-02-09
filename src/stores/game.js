@@ -4,9 +4,9 @@ export const useGameStore = defineStore("game", {
   state: () => ({
     score: 0,
     bestScore: 0,
-    speed: 3,
-    timeRemainingOption: 30,
-    timeRemainingCurrent: 30,
+    speed: 1,
+    timeRemainingOption: 60,
+    timeRemainingCurrent: 60,
     countdownIntervalId: null,
     wordsIntervalId: null,
     gameTimeOptions: [150, 120, 90, 60, 30],
