@@ -64,19 +64,14 @@ export default defineComponent({
     const selectedOption = ref(props.option);
 
     const onSelect = (value) => {
-      selectedOption.value = value;
-      context.emit("update:model-value", value);
+      if(value !== selectedOption.value)  {
+        selectedOption.value = value;
+        context.emit("update:model-value", value);
+      }
     }
-
     return {selectedOption, onSelect}
   }
 
 })
 </script>
-<style lang="scss" scoped>
-.q-field__control-container {
-  .q-field__native > span {
-    color: $primary !important;
-  }
-}
-</style>
+

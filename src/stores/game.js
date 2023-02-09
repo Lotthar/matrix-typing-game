@@ -51,6 +51,7 @@ export const useGameStore = defineStore("game", {
       clearInterval(this.wordsIntervalId);
       this.timeRemainingCurrent = new Number(this.timeRemainingOption);
       this.updateBestScoreIfBeaten();
+      this.score = 0;
     },
 
     updateBestScoreIfBeaten() {

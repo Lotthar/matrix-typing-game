@@ -39,6 +39,7 @@ export default defineComponent({
 
     const removeAfterFall = () => setTimeout(() => {
         isFalling.value = false;
+        word.value.active = false;
         removeWordFromScreen(word.value.word)
     }, 11000 - (1000 * props.speed));
 
@@ -61,6 +62,7 @@ export default defineComponent({
   font-weight: bold;
 }
 .not-falling {
+  visibility: none;
   color: "black";
   transition: none;
 }
@@ -109,8 +111,8 @@ export default defineComponent({
     transform: translateY(0);
   }
   to {
-    transform: translateY(75vh);
-    visibility: hidden;
+    transform: translateY(80vh);
+    display: none;
   }
 }
 </style>
