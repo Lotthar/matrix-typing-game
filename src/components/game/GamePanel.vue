@@ -1,6 +1,6 @@
 <template>
   <div v-if="screenWords.length > 0" class="q-ma-none screen-words-container">
-    <falling-word v-for="(word, index) in fallingWords" :key="index" :word="word" :speed="speed" />
+    <falling-word v-for="(word, index) in screenWords" :key="index" :word="word" :speed="speed" />
   </div>
 </template>
 
@@ -20,18 +20,13 @@ export default defineComponent({
     const { screenWords } = storeToRefs(wordStore);
     
     const { startGame } = gameStore;
-    const { loadAllWords, addNewWordToScreen } = wordStore;
-
-    const fallingWords = ref(screenWords.value);
+    const { loadAllWords, addNewWordToScreen, resetScreenWords } = wordStore;
 
     onMounted(() => {
-      startGame(loadAllWords, resetGame, addNewWordToScreen);
+      startGame(resetScreenWords, addNewWordToScreen,loadAllWords);
     })
 
-    const resetGame = () => {
-      screenWords.value = [];
-    }
-    return { fallingWords, speed ,screenWords }
+    return { speed ,screenWords }
   }
 
 })

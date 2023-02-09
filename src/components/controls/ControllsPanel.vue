@@ -1,9 +1,9 @@
 <template>
-  <div class="row no-wrap justify-evenly">
-    <words-input-panel @onEnter="wordEntered" :readonly="timeRemaining === 0" />
-    <status-panel :score="score" :bestScore="bestScore" :timeRemaining="timeRemaining" />
+  <div class="row no-wrap justify-around">
+    <words-input-panel @onEnter="wordEntered" />
+    <status-panel :score="score" :bestScore="bestScore" :timeRemaining="timeRemainingCurrent" />
     <settings-panel />
-    <!-- <restart-game /> -->
+    <restart-game />
   </div>
 </template>
 
@@ -23,11 +23,11 @@ export default defineComponent({
 
     const { increaseScore } = gameStore;
     const { scoreIfCorrect } = wordStore;
-    const { score,screenWords, bestScore, timeRemaining } = storeToRefs(gameStore);
+    const { score,screenWords, bestScore, timeRemainingCurrent } = storeToRefs(gameStore);
 
     const wordEntered = (word) => scoreIfCorrect(word.value,() => increaseScore(word.value));
 
-    return {wordEntered ,score,bestScore, timeRemaining ,screenWords}
+    return {wordEntered ,score,bestScore, timeRemainingCurrent ,screenWords}
   }
 
 })

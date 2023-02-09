@@ -33,6 +33,7 @@ export const useWordStore = defineStore("words", {
     },
 
     addNewWordToScreen() {
+      console.log("pravim rijec");
       this.screenWords.push({ word: this.getRandomWord(), active: true });
     },
     removeWordFromScreen(word) {
@@ -42,6 +43,9 @@ export const useWordStore = defineStore("words", {
     getRandomWord() {
       const randomWordIndex = Math.round(Math.random() * this.allWords.length);
       return this.allWords[randomWordIndex];
+    },
+    resetScreenWords() {
+      this.screenWords = [];
     },
   },
 });

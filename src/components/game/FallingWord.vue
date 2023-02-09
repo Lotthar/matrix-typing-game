@@ -1,7 +1,7 @@
 <template>
   <q-badge
     :style="{ left: `calc(${positionStyle}vw)`, color: word.active ? wordColor : 'black' }"
-    :class="`q-ma-none q-pa-none q-pl-sm q-pr-sm ${fallingClass} ${speedClass}`"
+    :class="`q-ma-none q-pa-none q-pl-sm q-pr-sm speedX${speed} ${fallingClass}`"
   >{{ word.word }}</q-badge>>
 </template>
 
@@ -40,28 +40,13 @@ export default defineComponent({
     const removeAfterFall = () => setTimeout(() => {
         isFalling.value = false;
         removeWordFromScreen(word.value.word)
-    }, 1000 * props.speed);
+    }, 11000 - (1000 * props.speed));
 
     const fallingClass = computed(() => {
       return isFalling.value || word.value.active ? 'falling' : 'not-falling';
     })
 
-    const speedClass = computed(() => {
-      switch (props.speed) {
-        case 12:
-          return "sec12";
-        case 9:
-          return "sec9";
-        case 6:
-          return "sec6";
-        case 3:
-          return "sec3";
-        default:
-          return "sec12";
-      }
-    });
-
-    return {speedClass, fallingClass, positionStyle, wordColor }
+    return { isFalling, fallingClass, positionStyle, wordColor }
 
   }
 
@@ -74,46 +59,57 @@ export default defineComponent({
   background: black;
   font-size: 15px;
   font-weight: bold;
-  transition: color 0.4s ease-in-out;
 }
 .not-falling {
-  visibility: hidden;
   color: "black";
+  transition: none;
 }
 .falling {
   position: absolute;
   animation-name: falling-word;
   animation-timing-function: linear;
   animation-iteration-count: 1;
+  transition: color 0.4s ease-in-out;
 }
 
-.sec12 {
-  -webkit-animation-duration: 12s;
-  animation-duration: 12s;
+.speedX1 {
+  -webkit-animation-duration: 10s;
+  animation-duration: 10s;
 }
 
-.sec9 {
+.speedX2 {
   -webkit-animation-duration: 9s;
   animation-duration: 9s;
 }
 
-.sec6 {
+.speedX3 {
+  -webkit-animation-duration: 8s;
+  animation-duration: 8s;
+}
+
+.speedX4 {
+  -webkit-animation-duration: 7s;
+  animation-duration: 7s;
+}
+.speedX5 {
   -webkit-animation-duration: 6s;
   animation-duration: 6s;
 }
-
-.sec3 {
-  -webkit-animation-duration: 3s;
-  animation-duration: 3s;
+.speedX6 {
+  -webkit-animation-duration: 5s;
+  animation-duration: 5s;
+}
+.speedX7 {
+  -webkit-animation-duration: 4s;
+  animation-duration: 4s;
 }
 
 @keyframes falling-word {
   from {
-    visibility: visible;
     transform: translateY(0);
   }
   to {
-    transform: translateY(72vh);
+    transform: translateY(75vh);
     visibility: hidden;
   }
 }
