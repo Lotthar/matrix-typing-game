@@ -18,3 +18,5 @@ export const playErrorSound = () => new Audio("/errorSound.mp3").play();
 
 export const getRandomWordColor = () =>
   wordColors[randomArrayIndex(wordColors)];
+
+export const getRandomWordPosition = () => Math.round(Math.random() * 100 + 10);

@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import useGameOptions from 'src/service/useGameOptions';
 import { useGameStore } from "stores/game";
+import { useWordStore } from "stores/words";
 import { storeToRefs } from "pinia";
 import { defineComponent,ref, onMounted } from 'vue';
 
@@ -15,14 +15,22 @@ export default defineComponent({
   setup() {
 
     const gameStore = useGameStore();
-    const { startGame } = useGameOptions();
-    const { speed, screenWords } = storeToRefs(gameStore);
+    const wordStore = useWordStore();
+    const { speed } = storeToRefs(gameStore);
+    const { screenWords } = storeToRefs(wordStore);
+    
+    const { startGame } = gameStore;
+    const { loadAllWords, addNewWordToScreen } = wordStore;
+
     const fallingWords = ref(screenWords.value);
 
     onMounted(() => {
-      startGame();
+      startGame(loadAllWords, resetGame, addNewWordToScreen);
     })
 
+    const resetGame = () => {
+      screenWords.value = [];
+    }
     return { fallingWords, speed ,screenWords }
   }
 

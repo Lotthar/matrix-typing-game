@@ -6,10 +6,9 @@
 </template>
 
 <script>
-import useWords from 'src/service/useWords';
 import { defineComponent,onMounted, computed, ref } from 'vue';
-import { getRandomWordColor } from "src/service/util";
-
+import { getRandomWordColor, getRandomWordPosition } from "src/service/util";
+import { useWordStore } from "stores/words";
 
 export default defineComponent({
   props: {
@@ -23,7 +22,8 @@ export default defineComponent({
   },
   setup(props) {
 
-    const { getRandomWordPosition, removeWordFromScreen } = useWords();
+    const wordStore = useWordStore();
+    const { removeWordFromScreen } = wordStore;
 
     const isFalling = ref(true);
     const word = ref(props.word);

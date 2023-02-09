@@ -29,7 +29,7 @@ export default defineComponent({
     }
   },  
   emits: ["onEnter"],
-  setup(props, context) {
+  setup(_, context) {
 
     const wordInput = ref(null);
 
