@@ -1,6 +1,9 @@
 <template>
   <div class="column justify-start text-primary">
-    <h5 class="q-ma-none q-mb-sm q-pa-none text-info text-weight-bolder">Game Status</h5>
+    <h6 class="q-ma-none text-primary text-weight-bold">
+      <q-icon class="q-mr-sm" color="primary" name="las la-user-tie" />
+      <span class="text-info text-weight-bolder text-h5">{{ $loggedUser }}</span>
+    </h6>
     <h6 class="q-ma-none text-primary text-weight-bold">
       <q-icon class="q-mr-sm" color="primary" name="las la-poll" />Score:
       <span class="text-info text-weight-bolder text-h5">{{ score }}</span>
@@ -11,7 +14,9 @@
     </h6>
     <h6 class="q-ma-none text-primary text-weight-bold">
       <q-icon class="q-mr-sm" color="primary" name="las la-stopwatch" />Time Remaining:
-      <span class="text-warning text-weight-bolder text-h5">{{ timeRemaining }}s</span>
+      <span
+        :class="`text-${timeRemaining <= 5 ? 'red' : 'warning'} text-weight-bolder text-h5`"
+      >{{ timeRemaining }}s</span>
     </h6>
   </div>
 </template>

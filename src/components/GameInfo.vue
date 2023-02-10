@@ -1,9 +1,5 @@
 <template>
-  <div class="column justify-start text-primary">
-    <h6 class="q-ma-none q-mb-sm text-primary text-weight-bold">
-      <q-icon class="q-mr-sm" color="primary" name="las la-user-tie" />
-      <span class="text-info text-weight-bolder text-h5">{{ $loggedUser }}</span>
-    </h6>
+  <div class="column q-mt-lg justify-center text-primary">
     <q-btn
       dense
       class="text-weight-bolder text-h5 q-pr-sm q-mb-sm"
@@ -36,6 +32,7 @@ import { defineComponent,ref} from 'vue';
 import { useGameStore } from "stores/game";
 import { useWordStore } from "stores/words";
 import { storeToRefs } from "pinia";
+import { useUser } from 'src/service/util';
 
 export default defineComponent({
 
@@ -43,15 +40,15 @@ export default defineComponent({
 
     const gameStore = useGameStore();
     const wordStore = useWordStore();
+    const { deleteUser } = useUser();
 
     const { startGame, gameFinished, newGame } = gameStore;
     const { resetScreenWords, addNewWordToScreen } = wordStore;
     const {  } = storeToRefs(gameStore);
     
-    const user = ref("Branko");
-
     const onNewGame = () => {
       gameFinished(resetScreenWords);
+      deleteUser();
       newGame("GamePage");
     }
 
@@ -60,7 +57,7 @@ export default defineComponent({
       startGame(resetScreenWords,addNewWordToScreen)
     }
 
-    return { user,onNewGame, onRestart}
+    return { onNewGame, onRestart}
   }
 })
 </script>
