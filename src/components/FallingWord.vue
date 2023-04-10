@@ -60,7 +60,7 @@ export default defineComponent({
 .q-badge {
   border: none;
   background: black;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: bold;
 }
 .not-falling {

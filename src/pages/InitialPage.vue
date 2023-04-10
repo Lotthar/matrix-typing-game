@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { defineComponent,ref } from 'vue';
+import { defineComponent,onMounted } from 'vue';
 import { useUser } from "src/service/util";
 import { useGameStore } from 'src/stores/game';
 import { useWordStore } from 'src/stores/words';
@@ -37,7 +37,13 @@ export default defineComponent({
     const { newGame } = gameStore;
     const { loadAllWords, addNewWordToScreen, resetScreenWords } = wordStore;
 
-    const { newUser, usernameRef} = useUser();
+    const { newUser,loadSavedUser, usernameRef} = useUser();
+    
+    onMounted(() => {
+      loadSavedUser();
+      console.log(usernameRef.value);
+      if(usernameRef.value !== null) onEnter();
+    })
     
     const onEnter = () => {
       console.log("New game starting...")

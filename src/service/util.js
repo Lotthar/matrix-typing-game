@@ -38,18 +38,27 @@ export const useUser = () => {
   const { saveInStorage, getFromStorage } = useSessionStorage();
   const app = getCurrentInstance();
 
+  const USER_KEY = "user";
   const usernameRef = ref(null);
 
   const loadSavedUser = () => {
-    app.appContext.config.globalProperties.$loggedUser = getFromStorage("user");
+    const user = getFromStorage(USER_KEY);
+    app.appContext.config.globalProperties.$loggedUser = user;
+    usernameRef.value = user;
   };
+
+  const deleteUser = () => {
+    saveInStorage(USER_KEY, null);
+    usernameRef.value = null;
+    app.appContext.config.globalProperties.$loggedUser = null;
+  };
+
   const newUser = () => {
     if (!!app && !!usernameRef.value) {
       app.appContext.config.globalProperties.$loggedUser = usernameRef.value;
-      console.log(app.appContext.config.globalProperties.$loggedUser);
-      saveInStorage("user", usernameRef.value);
+      saveInStorage(USER_KEY, usernameRef.value);
     }
   };
 
-  return { newUser, loadSavedUser, usernameRef };
+  return { newUser, loadSavedUser, usernameRef, deleteUser };
 };
