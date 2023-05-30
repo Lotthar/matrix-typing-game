@@ -39,10 +39,12 @@ export const useUser = () => {
   const app = getCurrentInstance();
 
   const USER_KEY = "user";
+  const EMPTY_VAL = "null";
   const usernameRef = ref(null);
 
   const loadSavedUser = () => {
-    const user = getFromStorage(USER_KEY);
+    let user = getFromStorage(USER_KEY);
+    if (user === EMPTY_VAL) user = null;
     app.appContext.config.globalProperties.$loggedUser = user;
     usernameRef.value = user;
   };
@@ -60,5 +62,5 @@ export const useUser = () => {
     }
   };
 
-  return { newUser, loadSavedUser, usernameRef, deleteUser };
+  return { newUser, loadSavedUser, usernameRef, deleteUser, EMPTY_VAL };
 };

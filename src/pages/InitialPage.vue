@@ -29,7 +29,7 @@ import { useWordStore } from 'src/stores/words';
 
 
 export default defineComponent({
-  
+
   setup() {
 
     const gameStore = useGameStore();
@@ -38,13 +38,13 @@ export default defineComponent({
     const { loadAllWords, addNewWordToScreen, resetScreenWords } = wordStore;
 
     const { newUser,loadSavedUser, usernameRef} = useUser();
-    
+
     onMounted(() => {
       loadSavedUser();
       console.log(usernameRef.value);
-      if(usernameRef.value !== null) onEnter();
+      if(usernameRef.value != null) onEnter();
     })
-    
+
     const onEnter = () => {
       console.log("New game starting...")
       newGame("InitialPage", newUser, resetScreenWords, addNewWordToScreen, loadAllWords);
