@@ -62,5 +62,5 @@ export const useUser = () => {
     }
   };
 
-  return { newUser, loadSavedUser, usernameRef, deleteUser, EMPTY_VAL };
+  return { newUser, loadSavedUser, usernameRef, deleteUser };
 };
