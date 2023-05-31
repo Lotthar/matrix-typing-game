@@ -38,7 +38,7 @@ export default defineComponent({
       else return calcPosition;
     });
 
-    const removeAfterFall = () => 
+    const removeAfterFall = () =>
       setTimeout(() => {
         isFalling.value = false;
         word.value.active = false;
@@ -60,7 +60,7 @@ export default defineComponent({
 .q-badge {
   border: none;
   background: black;
-  font-size: 18px;
+  font-size: 21px;
   font-weight: bold;
 }
 .not-falling {
